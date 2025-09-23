@@ -13,7 +13,7 @@ import {
 import Link from "next/link"
 import { useRouter } from "next/navigation"
 
-import CustomTextField from "@/app/(DashboardLayout)/components/forms/theme-elements/CustomTextField"
+import CustomTextField from "@/app/admin/components/forms/theme-elements/CustomTextField"
 import { createBrowserSupabase } from "@/utils/supabase/client"
 
 interface loginType {
@@ -64,13 +64,10 @@ const AuthLogin = ({ title, subtitle, subtext }: loginType) => {
         setErr("Akses hanya untuk admin")
         return
       }
-
-      // Kalau admin → redirect ke dashboard admin
-      router.push("/admin")
     }
 
     // login sukses → redirect (nanti bisa diarahkan ke /admin/dashboard)
-    router.push("/")
+    router.push("/admin")
   }
 
   return (

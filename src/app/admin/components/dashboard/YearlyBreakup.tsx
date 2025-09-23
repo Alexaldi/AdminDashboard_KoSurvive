@@ -1,43 +1,42 @@
+import dynamic from "next/dynamic"
+const Chart = dynamic(() => import("react-apexcharts"), { ssr: false })
+import { useTheme } from "@mui/material/styles"
+import { Grid, Stack, Typography, Avatar } from "@mui/material"
+import { IconArrowUpLeft } from "@tabler/icons-react"
 
-import dynamic from "next/dynamic";
-const Chart = dynamic(() => import("react-apexcharts"), { ssr: false });
-import { useTheme } from '@mui/material/styles';
-import { Grid, Stack, Typography, Avatar } from '@mui/material';
-import { IconArrowUpLeft } from '@tabler/icons-react';
-
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
+import DashboardCard from "@/app/admin/components/shared/DashboardCard"
 
 const YearlyBreakup = () => {
   // chart color
-  const theme = useTheme();
-  const primary = theme.palette.primary.main;
-  const primarylight = '#ecf2ff';
-  const successlight = theme.palette.success.light;
+  const theme = useTheme()
+  const primary = theme.palette.primary.main
+  const primarylight = "#ecf2ff"
+  const successlight = theme.palette.success.light
 
   // chart
   const optionscolumnchart: any = {
     chart: {
-      type: 'donut',
+      type: "donut",
       fontFamily: "'Plus Jakarta Sans', sans-serif;",
-      foreColor: '#adb0bb',
+      foreColor: "#adb0bb",
       toolbar: {
         show: false,
       },
       height: 155,
     },
-    colors: [primary, primarylight, '#F9F9FD'],
+    colors: [primary, primarylight, "#F9F9FD"],
     plotOptions: {
       pie: {
         startAngle: 0,
         endAngle: 360,
         donut: {
-          size: '75%',
-          background: 'transparent',
+          size: "75%",
+          background: "transparent",
         },
       },
     },
     tooltip: {
-      theme: theme.palette.mode === 'dark' ? 'dark' : 'light',
+      theme: theme.palette.mode === "dark" ? "dark" : "light",
       fillSeriesColor: false,
     },
     stroke: {
@@ -59,8 +58,8 @@ const YearlyBreakup = () => {
         },
       },
     ],
-  };
-  const seriescolumnchart: any = [38, 40, 25];
+  }
+  const seriescolumnchart: any = [38, 40, 25]
 
   return (
     <DashboardCard title="Yearly Breakup">
@@ -69,8 +68,9 @@ const YearlyBreakup = () => {
         <Grid
           size={{
             xs: 7,
-            sm: 7
-          }}>
+            sm: 7,
+          }}
+        >
           <Typography variant="h3" fontWeight="700">
             $36,358
           </Typography>
@@ -88,7 +88,12 @@ const YearlyBreakup = () => {
           <Stack spacing={3} mt={5} direction="row">
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar
-                sx={{ width: 9, height: 9, bgcolor: primary, svg: { display: 'none' } }}
+                sx={{
+                  width: 9,
+                  height: 9,
+                  bgcolor: primary,
+                  svg: { display: "none" },
+                }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
                 2024
@@ -96,7 +101,12 @@ const YearlyBreakup = () => {
             </Stack>
             <Stack direction="row" spacing={1} alignItems="center">
               <Avatar
-                sx={{ width: 9, height: 9, bgcolor: primarylight, svg: { display: 'none' } }}
+                sx={{
+                  width: 9,
+                  height: 9,
+                  bgcolor: primarylight,
+                  svg: { display: "none" },
+                }}
               ></Avatar>
               <Typography variant="subtitle2" color="textSecondary">
                 2025
@@ -108,18 +118,20 @@ const YearlyBreakup = () => {
         <Grid
           size={{
             xs: 5,
-            sm: 5
-          }}>
+            sm: 5,
+          }}
+        >
           <Chart
             options={optionscolumnchart}
             series={seriescolumnchart}
             type="donut"
-            height={150} width={"100%"}
+            height={150}
+            width={"100%"}
           />
         </Grid>
       </Grid>
     </DashboardCard>
-  );
-};
+  )
+}
 
-export default YearlyBreakup;
+export default YearlyBreakup

@@ -1,12 +1,18 @@
-"use client"
-import Link from "next/link"
-import { Grid, Box, Card, Stack, Typography } from "@mui/material"
-// components
-import PageContainer from "@/app/(DashboardLayout)/components/container/PageContainer"
-import Logo from "@/app/(DashboardLayout)/layout/shared/logo/Logo"
+import { redirect } from "next/navigation"
+import { createServerSupabase } from "@/utils/supabase/server"
+import PageContainer from "@/app/admin/components/container/PageContainer"
 import AuthLogin from "../auth/AuthLogin"
+import { Grid, Box, Card, Typography } from "@mui/material"
 
-const Login2 = () => {
+export default async function LoginPage() {
+  const supabase = await createServerSupabase()
+  const { data } = await supabase.auth.getUser()
+
+  // kalau udah login → redirect ke root/dashboard
+  if (data.user) {
+    redirect("/")
+  }
+
   return (
     <PageContainer title="Login" description="this is Login page">
       <Box
@@ -34,19 +40,14 @@ const Login2 = () => {
             display="flex"
             justifyContent="center"
             alignItems="center"
-            size={{
-              xs: 12,
-              sm: 12,
-              lg: 4,
-              xl: 3,
-            }}
+            size={{ xs: 12, sm: 12, lg: 4, xl: 3 }}
           >
             <Card
               elevation={9}
               sx={{ p: 4, zIndex: 1, width: "100%", maxWidth: "500px" }}
             >
               <Box display="flex" alignItems="center" justifyContent="center">
-                <Logo />
+                KosSurvive
               </Box>
               <AuthLogin
                 subtext={
@@ -67,4 +68,3 @@ const Login2 = () => {
     </PageContainer>
   )
 }
-export default Login2

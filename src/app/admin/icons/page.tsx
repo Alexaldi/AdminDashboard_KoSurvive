@@ -1,21 +1,19 @@
-'use client';
-import PageContainer from '@/app/(DashboardLayout)/components/container/PageContainer';
-import DashboardCard from '@/app/(DashboardLayout)/components/shared/DashboardCard';
-import { Typography, Link, Box, Divider } from '@mui/material';
-import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs";
-import SyntaxHighlighter from "react-syntax-highlighter";
+"use client"
+import PageContainer from "@/app/admin/components/container/PageContainer"
+import DashboardCard from "@/app/admin/components/shared/DashboardCard"
+import { Typography, Link, Box, Divider } from "@mui/material"
+import { docco } from "react-syntax-highlighter/dist/esm/styles/hljs"
+import SyntaxHighlighter from "react-syntax-highlighter"
 
 const Icons = () => {
   return (
     <PageContainer title="Icons" description="this is Icons">
-
       <DashboardCard title="Icons">
-
         <Typography variant="h6" gutterBottom>
           🔍 Explore Icons
         </Typography>
         <Typography variant="body1" gutterBottom>
-          Browse and search for icons directly on the{' '}
+          Browse and search for icons directly on the{" "}
           <Link
             href="https://tabler-icons.io/"
             target="_blank"
@@ -24,7 +22,8 @@ const Icons = () => {
             color="primary"
           >
             Tabler Icons website
-          </Link>.
+          </Link>
+          .
         </Typography>
 
         <Divider sx={{ my: 3 }} />
@@ -33,14 +32,13 @@ const Icons = () => {
           ⚙️ Installation
         </Typography>
 
-
         <Typography variant="body1" gutterBottom>
-          To use Tabler icons in your project, install the official React package:
+          To use Tabler icons in your project, install the official React
+          package:
         </Typography>
         <SyntaxHighlighter language="typescript" style={docco}>
           {` npm install @tabler/icons-react `}
         </SyntaxHighlighter>
-
 
         <Divider sx={{ my: 3 }} />
 
@@ -59,7 +57,7 @@ function MyComponent() {
         </SyntaxHighlighter>
       </DashboardCard>
     </PageContainer>
-  );
-};
+  )
+}
 
-export default Icons;
+export default Icons

@@ -1,5 +1,8 @@
-import React, { useState } from "react";
-import Link from "next/link";
+"use client"
+
+import React, { useState } from "react"
+import Link from "next/link"
+import { useRouter } from "next/navigation"
 import {
   Avatar,
   Box,
@@ -9,46 +12,46 @@ import {
   MenuItem,
   ListItemIcon,
   ListItemText,
-} from "@mui/material";
-
-import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react";
+} from "@mui/material"
+import { IconListCheck, IconMail, IconUser } from "@tabler/icons-react"
+import { createBrowserSupabase } from "@/utils/supabase/client"
 
 const Profile = () => {
-  const [anchorEl2, setAnchorEl2] = useState(null);
-  const handleClick2 = (event: any) => {
-    setAnchorEl2(event.currentTarget);
-  };
+  const [anchorEl2, setAnchorEl2] = useState<null | HTMLElement>(null)
+  const router = useRouter()
+  const supabase = createBrowserSupabase()
+
+  const handleClick2 = (event: React.MouseEvent<HTMLElement>) => {
+    setAnchorEl2(event.currentTarget)
+  }
   const handleClose2 = () => {
-    setAnchorEl2(null);
-  };
+    setAnchorEl2(null)
+  }
+
+  const handleLogout = async () => {
+    await supabase.auth.signOut()
+    router.push("/authentication/login")
+  }
 
   return (
     <Box>
       <IconButton
         size="large"
-        aria-label="show 11 new notifications"
         color="inherit"
         aria-controls="msgs-menu"
         aria-haspopup="true"
         sx={{
-          ...(typeof anchorEl2 === "object" && {
-            color: "primary.main",
-          }),
+          ...(anchorEl2 && { color: "primary.main" }),
         }}
         onClick={handleClick2}
       >
         <Avatar
           src="/images/profile/user-1.jpg"
           alt="image"
-          sx={{
-            width: 35,
-            height: 35,
-          }}
+          sx={{ width: 35, height: 35 }}
         />
       </IconButton>
-      {/* ------------------------------------------- */}
-      {/* Message Dropdown */}
-      {/* ------------------------------------------- */}
+
       <Menu
         id="msgs-menu"
         anchorEl={anchorEl2}
@@ -58,9 +61,7 @@ const Profile = () => {
         anchorOrigin={{ horizontal: "right", vertical: "bottom" }}
         transformOrigin={{ horizontal: "right", vertical: "top" }}
         sx={{
-          "& .MuiMenu-paper": {
-            width: "200px",
-          },
+          "& .MuiMenu-paper": { width: "200px" },
         }}
       >
         <MenuItem>
@@ -83,10 +84,9 @@ const Profile = () => {
         </MenuItem>
         <Box mt={1} py={1} px={2}>
           <Button
-            href="/authentication/login"
+            onClick={handleLogout}
             variant="outlined"
             color="primary"
-            component={Link}
             fullWidth
           >
             Logout
@@ -94,7 +94,7 @@ const Profile = () => {
         </Box>
       </Menu>
     </Box>
-  );
-};
+  )
+}
 
-export default Profile;
+export default Profile
